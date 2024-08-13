@@ -30,10 +30,10 @@ class General(commands.Cog):
 
             # embed.set_footer(text= footer_text, icon_url= bot.user.avatar.url)
             await ctx.respond(embed= embed)
-        
-        # /bot calculator
-        @bot_group.command(name= "calculator", description= "Basic calculator")
-        async def calculator(ctx: discord.ApplicationContext, num1: int, operation: discord.Option(str, choices= ["+", "-", "*", "/"]), num2: int): # type: ignore
+    
+    # /calculator
+    @discord.slash_command(name= "calculator", description= "Basic calculator")
+    async def calculator(ctx: discord.ApplicationContext, num1: int, operation: discord.Option(str, choices= ["+", "-", "*", "/"]), num2: int): # type: ignore
             if operation == "+":
                 result = num1 + num2
             elif operation == "-":
