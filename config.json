@@ -1,6 +1,6 @@
 {
     "extensions": [
-        "info"
+        "bot"
     ],
     "db": {
         "settings": "database/settings.db",

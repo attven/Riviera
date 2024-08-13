@@ -8,10 +8,10 @@ class Bot(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-        info = bot.create_group("info", "Information commands")
+        bot = bot.create_group("bot", "Bot related commands")
 
-        # /info ping
-        @info.command(name= "ping", description= "Check if bot is alive?")
+        # /bot ping
+        @bot.command(name= "ping", description= "Check if bot is alive?")
         async def ping(self, ctx: discord.ApplicationContext):
             embed = discord.Embed(
                 title= ":ping_pong: Pong!",
@@ -22,8 +22,8 @@ class Bot(commands.Cog):
             embed.set_footer(text= footer_text, icon_url= self.bot.user.avatar.url)
             await ctx.respond(embed= embed)
         
-        # /info bot
-        @info.command(name= "bot", description= "General bot information")
+        # /bot info
+        @bot.command(name= "info", description= "General bot information")
         async def bot_info(self, ctx: discord.ApplicationContext):
             embed = discord.Embed(
                 title= "Riviera",
@@ -33,7 +33,7 @@ class Bot(commands.Cog):
             embed.set_footer(text= footer_text, icon_url= self.bot.user.avatar.url)
             await ctx.respond(embed= embed)
         
-        # /info server
+        # /bot calculator
 
 def setup(bot):
     bot.add_cog(Bot(bot))
