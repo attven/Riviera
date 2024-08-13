@@ -1,9 +1,23 @@
-import discord
+import discord, sqlite3, json
 from discord.ext import commands
+
+with open("./config.json", "r") as f:
+    config = json.load(f)
+
+def account_create(user_id: int):
+    with sqlite3.connect(config["db"]["accounts"]) as conn:
+        with conn:
+            conn.execute("")
 
 class Accounts(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+        # Create database
+        with sqlite3.connect(config["db"]["accounts"]) as conn:
+            with conn:
+                conn.execute("CREATE TABLE IF NOT EXISTS users (user INTEGER PRIMARY KEY, balance FLOAT, score INTEGER)")
+                conn.execute("CREATE TABLE IF NOT EXISTS ")
 
         # Command group
         accounts = bot.create_group("accounts", "Account-related commands")

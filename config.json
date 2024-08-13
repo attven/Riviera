@@ -1,10 +1,8 @@
 {
     "extensions": [
-        "bot"
+        "general"
     ],
     "db": {
-        "settings": "database/settings.db",
-        "statistics": "database/statistics.db",
-        "economy": "database/economy.db"
+        "accounts": "database/accounts.db"
     }
 }
