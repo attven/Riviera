@@ -2,6 +2,9 @@ import discord, sqlite3, json
 from discord.ext import commands
 from main import footer_text
 
+from scripts.tracker import StatisticsTracker
+stats = StatisticsTracker()
+
 with open("./config.json", "r") as f:
     config = json.load(f)
 
@@ -64,6 +67,7 @@ class Transactions(commands.Cog):
 
                 embed.set_footer(text= footer_text)
                 await ctx.respond(embed= embed)
+                stats.track_commands(ctx)
 
         # /transfer guild
 

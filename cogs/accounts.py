@@ -2,6 +2,9 @@ import discord, sqlite3, json
 from discord.ext import commands
 from main import footer_text
 
+from scripts.tracker import StatisticsTracker
+stats = StatisticsTracker()
+
 with open("./config.json", "r") as f:
     config = json.load(f)
 
@@ -25,6 +28,7 @@ def account_create(type, id: int):
     with sqlite3.connect(config["db"]["profiles"]) as conn:
         with conn:
             conn.execute("INSERT INTO profiles (id, profile_type, profile_id) VALUES (?, ?, ?)", (id, type, id))
+    stats.track_events("account created", f"type: {type}, id: {id}")
 
 def account_balance(type, id: int):
     with sqlite3.connect(config["db"]["accounts"][type]) as conn:
@@ -80,11 +84,13 @@ class Accounts(commands.Cog):
                 
                 embed.set_footer(text= footer_text)
                 await ctx.respond(embed= embed)
+                stats.track_commands(ctx)
         
         # /account overview
         @accounts.command(name= "overview", description= "Your account at a glimpse")
         async def overview(ctx: discord.ApplicationContext):
             await ctx.respond("wip")
+            stats.track_commands(ctx)
         
         # /account switch
 

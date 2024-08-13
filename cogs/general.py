@@ -2,6 +2,9 @@ import discord
 from discord.ext import commands
 from main import footer_text
 
+from scripts.tracker import StatisticsTracker
+stats = StatisticsTracker()
+
 class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -19,6 +22,7 @@ class General(commands.Cog):
 
             # embed.set_footer(text= footer_text, icon_url= bot.user.avatar.url)
             await ctx.respond(embed= embed)
+            stats.track_commands(ctx)
         
         # /bot info
         @bot_group.command(name= "info", description= "General bot information")
@@ -30,6 +34,7 @@ class General(commands.Cog):
 
             # embed.set_footer(text= footer_text, icon_url= bot.user.avatar.url)
             await ctx.respond(embed= embed)
+            stats.track_commands(ctx)
     
     # /calculator
     @discord.slash_command(name= "calculator", description= "Basic calculator")
@@ -52,6 +57,7 @@ class General(commands.Cog):
 
             # embed.set_footer(text= footer_text, icon_url= bot.user.avatar.url)
             await ctx.respond(embed= embed)
+            stats.track_commands(ctx)
 
 def setup(bot):
     bot.add_cog(General(bot))
