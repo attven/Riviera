@@ -1,3 +1,10 @@
 {
-    "extensions":[]
+    "extensions": [
+        "info"
+    ],
+    "db": {
+        "settings": "database/settings.db",
+        "statistics": "database/statistics.db",
+        "economy": "database/economy.db"
+    }
 }
