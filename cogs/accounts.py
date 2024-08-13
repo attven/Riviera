@@ -89,7 +89,15 @@ class Accounts(commands.Cog):
         # /account overview
         @accounts.command(name= "overview", description= "Your account at a glimpse")
         async def overview(ctx: discord.ApplicationContext):
-            await ctx.respond("wip")
+            embed = discord.Embed(
+                title= "Account overview",
+                description= "Time to have a look into your account huh",
+            )
+            embed.add_field(name= "Balance:", value= f"{account_balance('users', ctx.author.id)}", inline= True)
+            embed.add_field(name= "Score:", value= f"{account_score('users', ctx.author.id)}", inline= True)
+
+            embed.set_footer(text= footer_text)
+            await ctx.respond(embed= embed)
             stats.track_commands(ctx)
         
         # /account switch
