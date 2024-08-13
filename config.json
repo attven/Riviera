@@ -1,11 +1,15 @@
 {
     "extensions": [
         "general",
-        "accounts"
+        "accounts",
+        "transactions"
     ],
     "db": {
         "accounts": {
             "users": "database/accounts/users.db"
-        }
+        },
+        "transactions": "database/transactions.db",
+        "profiles": "database/profiles.db",
+        "statistics": "database/statistics.db"
     }
 }

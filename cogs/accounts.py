@@ -16,17 +16,47 @@ def account_exists(type, id: int):
                 return True
 
 def account_create(type, id: int):
+    # Add to accounts database
     with sqlite3.connect(config["db"]["accounts"][type]) as conn:
         with conn:
             conn.execute("INSERT INTO accounts (id, balance, score) VALUES (?, ?, ?)", (id, 0, 0))
 
+    # Set profile to personal
+    with sqlite3.connect(config["db"]["profiles"]) as conn:
+        with conn:
+            conn.execute("INSERT INTO profiles (id, profile_type, profile_id) VALUES (?, ?, ?)", (id, type, id))
+
+def account_balance(type, id: int):
+    with sqlite3.connect(config["db"]["accounts"][type]) as conn:
+        with conn:
+            cursor = conn.execute("SELECT balance FROM accounts WHERE id = ?", (id,))
+            return cursor.fetchone()[0]
+        
+def account_score(type, id: int):
+    with sqlite3.connect(config["db"]["accounts"][type]) as conn:
+        with conn:
+            cursor = conn.execute("SELECT score FROM accounts WHERE id = ?", (id,))
+            return cursor.fetchone()[0]
+
+def account_profile():
+    with sqlite3.connect(config["db"]["profiles"]) as conn:
+        with conn:
+            cursor = conn.execute("SELECT profile_type, profile_id FROM profiles WHERE id = ?", (id,))
+            return cursor.fetchone()
+
 class Accounts(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        # User database
         with sqlite3.connect(config["db"]["accounts"]["users"]) as conn:
             with conn:
                 conn.execute("CREATE TABLE IF NOT EXISTS accounts (id INTEGER PRIMARY KEY, balance FLOAT, score INTEGER)")
                 conn.execute("CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY, setting TEXT)")
+        
+        # Profile database
+        with sqlite3.connect(config["db"]["profiles"]) as conn:
+            with conn:
+                conn.execute("CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY, profile_type TEXT, profile_id INTEGER)")
 
         # Command group
         accounts = bot.create_group("accounts", "Account-related commands")
@@ -64,3 +94,8 @@ class Accounts(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Accounts(bot))
+    # Add functions to bot object
+    bot.account_exists = account_exists
+    bot.account_create = account_create
+    bot.account_balance = account_balance
+    bot.account_score = account_score
