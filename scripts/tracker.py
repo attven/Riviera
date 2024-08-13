@@ -9,7 +9,6 @@ class StatisticsTracker:
             with conn:
                 conn.execute("CREATE TABLE IF NOT EXISTS commands (command TEXT, author INTEGER, channel INTEGER, guild INTEGER, latency INTEGER, timestamp TEXT)")
                 conn.execute("CREATE TABLE IF NOT EXISTS events (event TEXT, details TEXT, timestamp TEXT)")
-        print("Statistics tracker initialized")
     
     def track_commands(self, ctx):
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -17,7 +16,7 @@ class StatisticsTracker:
         with sqlite3.connect(config["db"]["statistics"]) as conn:
             with conn:
                 conn.execute("INSERT INTO commands (command, author, channel, guild, latency, timestamp) VALUES (?,?,?,?,?,?)", (ctx.command.name, ctx.author.id, ctx.channel.id, ctx.guild.id, latency, timestamp))
-        print(f"- {ctx.command.name}\nauthor: {ctx.author.id}, channel: {ctx.channel.id}, latency: {latency}")
+        print(f"- /{ctx.command.name}\nauthor: {ctx.author.id}, channel: {ctx.channel.id}, latency: {latency}")
 
     def track_transactions(self, receiver, sender, amount, timestamp):
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
