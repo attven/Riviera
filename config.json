@@ -8,6 +8,9 @@
         "accounts": {
             "users": "database/accounts/users.db"
         },
+        "farming": {
+            "users:": "database/farming/users.db"
+        },
         "transactions": "database/transactions.db",
         "profiles": "database/profiles.db",
         "statistics": "database/statistics.db"

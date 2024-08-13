@@ -1,12 +1,9 @@
 import os, discord, json
 from dotenv import load_dotenv
 os.system('cls' if os.name == 'nt' else 'clear')
-
-# Change this to your own footer text
-footer_text = "Riviera"
-
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+footer_text = "Riviera"
 
 with open("./config.json", "r") as f:
     config = json.load(f)
