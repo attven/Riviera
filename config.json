@@ -6,13 +6,19 @@
     ],
     "db": {
         "accounts": {
-            "users": "database/accounts/users.db"
+            "users": "database/accounts/users.db",
+            "guilds": "database/accounts/guilds.db",
+            "shared": "database/accounts/shared.db"
         },
         "farming": {
             "users:": "database/farming/users.db"
         },
+        "mining": {
+            "users": "database/mining/users.db"
+        },
         "transactions": "database/transactions.db",
         "profiles": "database/profiles.db",
         "statistics": "database/statistics.db"
-    }
+    },
+    "footer": "attventures riviera"
 }
