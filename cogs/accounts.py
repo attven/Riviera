@@ -71,7 +71,7 @@ class Accounts(commands.Cog):
             if account_exists("users", ctx.author.id):
                 embed = discord.Embed(
                     title= "Account already exists",
-                    description= "You are already inside the Riviera database."
+                    description= "You're already alive. aren't You?"
                 )
 
                 embed.set_footer(text= footer_text)
@@ -91,10 +91,10 @@ class Accounts(commands.Cog):
         async def overview(ctx: discord.ApplicationContext):
             embed = discord.Embed(
                 title= "Account overview",
-                description= "Time to have a look into your account huh",
+                description= "Time to open up your account..",
             )
             embed.add_field(name= "Balance:", value= f"{account_balance('users', ctx.author.id)}", inline= True)
-            embed.add_field(name= "Score:", value= f"{account_score('users', ctx.author.id)}", inline= True)
+            embed.add_field(name= "Standing:", value= f"{account_score('users', ctx.author.id)}", inline= True)
 
             embed.set_footer(text= footer_text)
             await ctx.respond(embed= embed)
