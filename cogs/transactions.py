@@ -36,7 +36,7 @@ class Transactions(commands.Cog):
             if sender_balance < amount:
                 embed = discord.Embed(
                     title= "Transaction failed",
-                    description= "Your account does not have a sufficient balance to complete this transaction.",
+                    description= "Your payment method was declined.",
                     color= discord.Color.brand_red()
                 )
 
@@ -59,7 +59,7 @@ class Transactions(commands.Cog):
                 transaction_user("users", ctx.author.id, receiver.id, amount)
                 embed = discord.Embed(
                     title= "Transaction successful",
-                    description= "You can't keep wasting your life earnings.",
+                    description= "You can't keep wasting your life earnings. ",
                     color= discord.Color.brand_green()
                 )
                 embed.add_field(name= "Receiver", value= receiver.mention, inline= True)
