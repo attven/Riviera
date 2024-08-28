@@ -16,7 +16,7 @@ class General(commands.Cog):
         async def ping(ctx: discord.ApplicationContext):
             embed = discord.Embed(
                 title= ":ping_pong: Pong!",
-                description= "This bot is alive and well, thanks for checking in."
+                description= "I'm alive and well, thanks for checking. I still don't like you though."
             )
             embed.add_field(name= "Latency:", value= f"{round(bot.latency * 1000)}ms")
 
